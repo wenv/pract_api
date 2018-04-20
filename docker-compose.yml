@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  web:
+  web2:
     build: .
     volumes:
       - ./:/app
@@ -9,9 +9,9 @@ services:
     ports:
       - '7777:7777'
     links:
-      - mongo
+      - mongoo
 
-  mongo:
+  mongoo:
     image: mongo:3.0
     ports:
       - '27017:27017'
