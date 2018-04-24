@@ -1,38 +1,35 @@
 var express = require('express');
 var router = express.Router();
 var _ = require("underscore");
-var User = require("../../../database/collections/user");
+var INGR = require("../../../database/collections/ingrediente");
 
 //CRUD Create, Read, Update, Delete
 //Creation of users
-router.post("/user", (req, res) => {
+router.post("/ingredientes", (req, res) => {
   //Ejemplo de validacion
-  if (req.body.name == "" && req.body.email == "") {
+  if (req.body.name == "" && req.body.peso== "") {
     res.status(400).json({
       "msn" : "formato incorrecto"
     });
     return;
   }
-  var user = {
+  var ingred = {
     name : req.body.name,
-    altura : req.body.altura,
-    peso : req.body.peso,
-    edad : req.body.edad,
-    sexo : req.body.sexo,
-    email : req.body.email
+    kacl : req.body.kacl,
+    peso : req.body.peso
   };
-  var userData = new User(user);
+  var userData = new INGR(ingred);
 
   userData.save().then( () => {
     //content-type
     res.status(200).json({
-      "msn" : "usuario Registrado con exito "
+      "msn" : "ingrediente Registrado con exito "
     });
   });
 });
 
 // READ all users
-router.get("/user", (req, res, next) => {
+router.get("/ingredientes", (req, res, next) => {
   User.find({}).exec( (error, docs) => {
     res.status(200).json(docs);
   })
